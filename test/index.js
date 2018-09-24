@@ -45,6 +45,12 @@ describe('mongoose-dummy', () => {
                         course: Number
                     }
                 ],
+                subSchema: {
+                    type: new mongoose.Schema({ score: Number, name: String })
+                },
+                subSchemaArray: {
+                    type: [new mongoose.Schema({ score: Number, name: String })]
+                },
                 is_student: {
                     type: Boolean
                 },
@@ -82,6 +88,12 @@ describe('mongoose-dummy', () => {
             randomObject.is_student.should.be.a('boolean');
             randomObject.parent.should.equal('5af8a4f33f56930349d8f45b')
             isObjectId(randomObject.parent).should.be.true;
+
+            // Subschemas
+            randomObject.subSchema.should.be.an('object');
+            randomObject.subSchema.should.have.property('score');
+            randomObject.subSchemaArray.should.be.an('array');
+            randomObject.subSchemaArray[0].should.have.property('score');
 
             // Check ignore fields
             expect(randomObject.created_at).to.be.undefined;
