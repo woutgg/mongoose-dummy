@@ -86,6 +86,12 @@ describe('mongoose-dummy', () => {
             randomObject.is_student.should.be.a('boolean');
             isObjectId(randomObject.parent).should.be.true;
 
+            // Subschemas
+            randomObject.subSchema.should.be.an('object');
+            randomObject.subSchema.should.have.property('score');
+            randomObject.subSchemaArray.should.be.an('array');
+            randomObject.subSchemaArray[0].should.have.property('score');
+
             // Check ignore fields
             expect(randomObject.created_at).to.be.undefined;
             expect(randomObject._id).to.be.undefined;
